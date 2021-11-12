@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.University">
         <activity
+            android:name=".AllStudents"
+            android:exported="false" />
+        <activity
+            android:name=".StudentRegister"
+            android:exported="false"
+            android:label="@string/title_activity_student_register"
+            android:theme="@style/Theme.University.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
