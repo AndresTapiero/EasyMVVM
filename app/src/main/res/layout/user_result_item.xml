@@ -38,4 +38,10 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <data>
+        <variable
+            name="model"
+            type="com.andrest.university.model.Students" />
+    </data>
+
 </layout>

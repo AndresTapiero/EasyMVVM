@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">university</string>
+    <string name="title_activity_student_register">university</string>
 </resources>
