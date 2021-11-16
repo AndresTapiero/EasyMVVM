@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andrest.university.R
-import com.andrest.university.model.Students
+import com.andrest.university.model.Student
 import com.andrest.university.util.Resources.Companion.AVERAGE_TEXT
 
-class StudentsAdapter(private val students: List<Students>) :
+class StudentsAdapter(private val students: List<Student>) :
     RecyclerView.Adapter<StudentsAdapter.ViewHolder>() {
 
     //Inflate view
@@ -32,7 +32,7 @@ class StudentsAdapter(private val students: List<Students>) :
         private val name = view.findViewById<TextView>(R.id.tvName)
         private val average = view.findViewById<TextView>(R.id.tvAverage)
 
-        fun bind(student: Students) {
+        fun bind(student: Student) {
             name.text = student.name + " " + student.lastName
             average.text = AVERAGE_TEXT + student.average
         }

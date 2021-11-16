@@ -1,11 +1,11 @@
 package com.andrest.university.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.andrest.university.R
 import com.andrest.university.adapters.StudentsAdapter
-import com.andrest.university.model.Students
+import com.andrest.university.model.Student
 
 class AllStudents : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,8 +15,8 @@ class AllStudents : AppCompatActivity() {
         val recycler = findViewById<RecyclerView>(R.id.rvStudents)
 
         recycler.adapter = StudentsAdapter(listOf(
-            Students("Andres","Tapi","5.0"),
-            Students("Brandon","Roble","5.0")
+            Student("Andres","Tapi","5.0"),
+            Student("Brandon","Roble","5.0")
         ))
 
     }

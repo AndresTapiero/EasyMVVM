@@ -1,27 +1,29 @@
 package com.andrest.university.views
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.andrest.university.R
 import com.andrest.university.databinding.ActivityMainBinding
-import com.andrest.university.model.Students
+import com.andrest.university.db.StudentApp
+import com.andrest.university.model.Student
 import com.andrest.university.util.Resources.Companion.EMPTY
 import com.andrest.university.util.Resources.Companion.PLEASE_DATA
 import com.andrest.university.viewmodel.StudentViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val key = "MY_KEY"
     private val studentViewModel: StudentViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
-    val arrayList: ArrayList<Students> = ArrayList<Students>()
-    var list: MutableList<Students> = mutableListOf<Students>()
+    val arrayList: ArrayList<Student> = ArrayList<Student>()
+    var list: MutableList<Student> = mutableListOf<Student>()
+
+    val app = applicationContext as StudentApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
            // binding.etLastName.text = it.lastName
         })
         listeners()
+
+        val allStudents = app.room.studentDao().getAllStudents()
     }
 
     private fun listeners(){
@@ -48,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("data", binding.etName.text.toString())
                 startActivity(intent)
 
-                list.add(Students(binding.etName.text.toString(), binding.etLastName.text.toString(), binding.etPromedio.toString()))
+                list.add(Student(1, binding.etName.text.toString(), binding.etLastName.text.toString(), binding.etPromedio.toString()))
                 println("list - " + list)
 
                 //SQLITE
