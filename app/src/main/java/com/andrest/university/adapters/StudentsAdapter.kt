@@ -9,8 +9,10 @@ import com.andrest.university.R
 import com.andrest.university.model.Student
 import com.andrest.university.util.Resources.Companion.AVERAGE_TEXT
 
-class StudentsAdapter(private val students: List<Student>) :
+class StudentsAdapter :
     RecyclerView.Adapter<StudentsAdapter.ViewHolder>() {
+
+    private var studentList = emptyList<Student>()
 
     //Inflate view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,11 +24,11 @@ class StudentsAdapter(private val students: List<Student>) :
 
     //Assign view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val student = students[position]
-        holder.bind(student)
+        val currentStudent = studentList[position]
+        holder.bind(currentStudent)
     }
 
-    override fun getItemCount(): Int = students.size
+    override fun getItemCount(): Int = studentList.size
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val name = view.findViewById<TextView>(R.id.tvName)
@@ -36,5 +38,10 @@ class StudentsAdapter(private val students: List<Student>) :
             name.text = student.name + " " + student.lastName
             average.text = AVERAGE_TEXT + student.average
         }
+    }
+
+    fun setData(student: List<Student>) {
+        this.studentList = student
+        notifyDataSetChanged()
     }
 }

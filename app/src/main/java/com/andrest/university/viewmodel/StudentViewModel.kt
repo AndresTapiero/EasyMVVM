@@ -1,21 +1,31 @@
 package com.andrest.university.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.andrest.university.db.StudentDb
 import com.andrest.university.model.Student
-import com.andrest.university.model.StudentsProvider
+import com.andrest.university.repository.StudentRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class StudentViewModel : ViewModel() {
-    private val _studentModel = MutableLiveData<Student>()
-    val studentModel: LiveData<Student> get() = _studentModel
+class StudentViewModel(application: Application) : AndroidViewModel(application) {
 
-    fun showStudents(){
-        val student = StudentsProvider.students
+    val readAllData: LiveData<List<Student>>
+    private val repository: StudentRepository
 
-        //studentModel.postValue(student)
+    init {
+        val studentDao = StudentDb.getDatabase(application).studentDao()
+        repository = StudentRepository(studentDao)
+        readAllData = repository.readAllData
     }
 
-}
+    fun addStudent(student: Student) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addStudent(student)
+        }
+    }
 
-//LiveData: Permite subscriubis
+
+}
