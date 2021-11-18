@@ -19,6 +19,6 @@ interface StudentDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addStudent(students: Student)
 
-    @Delete
-    fun delete(student: Student)
+    @Query("DELETE FROM Student")
+    fun deleteAllStudents()
 }
