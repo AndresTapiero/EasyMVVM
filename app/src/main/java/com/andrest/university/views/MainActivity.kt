@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listeners() {
-        binding.btnDelete.setOnClickListener { cleanEditTexts() }
+        binding.btnDelete.setOnClickListener { clearEditTexts() }
 
         binding.btnSend.setOnClickListener { insertDataToDatabase() }
 
@@ -36,29 +36,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun cleanEditTexts() {
-        binding.etName.setText(EMPTY)
-        binding.etLastName.setText(EMPTY)
-        binding.etPromedio.setText(EMPTY)
-    }
-
-
     private fun insertDataToDatabase() {
         val sName = binding.etName.text.toString()
         val sLastName = binding.etLastName.text.toString()
-        val sAverage = binding.etPromedio.text.toString()
+        val sAverage = binding.etAverage.text.toString()
 
         if (sName.isNotEmpty() && sLastName.isNotEmpty() && sAverage.isNotEmpty()) {
             val student = Student(0, sName, sLastName, sAverage)
-            // Add Data To Database
+            // add data to database
             mStudentViewModel.addStudent(student)
-            val intent: Intent = Intent(this, StudentRegister::class.java)
-            intent.putExtra("data", binding.etName.text.toString())
+            val intent = Intent(this, StudentRegister::class.java)
+
+            intent.putExtra(StudentRegister.NAME_STUDENT_KEY, binding.etName.text.toString())
+            intent.putExtra(StudentRegister.AVERAGE_STUDENT_KEY, binding.etAverage.text.toString())
             startActivity(intent)
-            cleanEditTexts()
+            clearEditTexts()
         } else {
             Toast.makeText(this, PLEASE_DATA, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun clearEditTexts() {
+        binding.etName.setText(EMPTY)
+        binding.etLastName.setText(EMPTY)
+        binding.etAverage.setText(EMPTY)
     }
 
 }

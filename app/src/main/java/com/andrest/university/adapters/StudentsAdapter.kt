@@ -31,12 +31,14 @@ class StudentsAdapter :
     override fun getItemCount(): Int = studentList.size
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        private val id = view.findViewById<TextView>(R.id.tvId)
         private val name = view.findViewById<TextView>(R.id.tvName)
         private val average = view.findViewById<TextView>(R.id.tvAverage)
 
         fun bind(student: Student) {
+            id.text = student.id.toString()
             name.text = student.name + " " + student.lastName
-            average.text = AVERAGE_TEXT + student.average
+            average.text = AVERAGE_TEXT + " " + student.average
         }
     }
 

@@ -1,4 +1,4 @@
-package com.andrest.university.views
+package com.andrest.university.views.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
