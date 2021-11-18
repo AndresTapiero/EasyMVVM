@@ -12,7 +12,7 @@ android {
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
         applicationId "com.andrest.university"
-        minSdk 26
+        minSdk 28
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -65,4 +65,6 @@ dependencies {
     kapt("androidx.room:room-compiler:2.3.0")
     //Coroutines
     implementation("androidx.lifecycle:lifecycle-runtime:2.4.0")
+    //Material Design
+    implementation 'com.google.android.material:material:<version>'
 }
